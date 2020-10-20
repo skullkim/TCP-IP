@@ -26,7 +26,7 @@ int main(int argc, char *argv[]){
     //여기서 초기화하는 주소는 나의 소켓이 아니라 연결시켜야 하는 상대방의 주소이다
     serv_addr.sin_family = AF_INET;
     serv_addr.sin_addr.s_addr = inet_addr(argv[1]);
-    serv_addr.sin_port = htons(aroi(argv[2]));
+    serv_addr.sin_port = htons(atoi(argv[2]));
 
     if(connect(sock, (struct sockaddr*)& serv_addr, sizeof(serv_addr)) == -1){
         error_handling("connect() error!");

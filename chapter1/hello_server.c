@@ -7,7 +7,7 @@
 
 //void errorHandling(char *message);
 
-void error_handlig(char *message){
+void error_handling(char *message){
     fputs(message, stderr);
     fputc('\n', stderr);
     exit(1);
@@ -30,7 +30,7 @@ int main(int argc, char *argv[]){
 
     //소켓 생성, 생성된 소켓은 운영체제가 가지고 있다, 파일 디스크립터를 반환
     serv_sock = socket(PF_INET, SOCK_STREAM, 0);
-    if(serv_sock == -1) errorHandling("socket() error");
+    if(serv_sock == -1) error_handling("socket() error");
     //주소 정보 초기화 이전에 초기화
     memset(&serv_addr, 0, sizeof(serv_addr));
     //주소정보 초기화
