@@ -14,7 +14,7 @@ int main(int argc, char* argv[])
 	struct sockaddr_in serv_addr;
 	char message[30];
 	int str_len=0;
-	int idx=0, read_len=0;
+	int idx=0, read_len=0, i;
 	
 	if(argc!=3){
 		printf("Usage : %s <IP> <port>\n", argv[0]);
@@ -27,23 +27,17 @@ int main(int argc, char* argv[])
 	
 	memset(&serv_addr, 0, sizeof(serv_addr));
 	serv_addr.sin_family=AF_INET;
-	serv_addr.sin_addr.s
-		_addr=inet_addr(argv[1]);
+	serv_addr.sin_addr.s_addr=inet_addr(argv[1]);
 	serv_addr.sin_port=htons(atoi(argv[2]));
 		
 	if(connect(sock, (struct sockaddr*)&serv_addr, sizeof(serv_addr))==-1) 
 		error_handling("connect() error!");
 
-	while(read_len=read(sock, &message[idx++], 1))
-	{
-		if(read_len==-1)
-			error_handling("read() error!");
-		
-		str_len+=read_len;
-	}
+	for(i=0; i<100; i++)		// busy waiting!!
+		printf("Wait time %d \n", i);
 
+	read(sock, message, sizeof(message));
 	printf("Message from server: %s \n", message);
-	printf("Function read call count: %d \n", str_len);
 	close(sock);
 	return 0;
 }
